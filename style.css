@@ -1,0 +1,224 @@
+/* --- VARIABLES AND BASE (Aetherwell Style) --- */
+:root {
+    --bg-color: #1a1a2e; 
+    --main-box-color: #202b38;
+    --text-color: #e4f9ff;
+    --accent-color: #00bcd4; /* Neon Cyan */
+    --btn-color: #3b5a75;
+    --correct-color: #4CAF50;
+    --incorrect-color: #F44336;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+.game-container {
+    width: 90%;
+    max-width: 700px;
+    background-color: var(--main-box-color);
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px var(--accent-color), 0 0 20px rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--accent-color);
+}
+
+/* --- GENERAL SCREEN & TRANSITIONS --- */
+.screen { transition: opacity 0.5s; padding: 20px 0; }
+.hidden { display: none; opacity: 0; }
+.active { opacity: 1; }
+
+.screen-title { text-align: center; color: var(--accent-color); margin-bottom: 30px; text-shadow: 0 0 5px var(--accent-color); }
+.description { text-align: center; color: #a4b0be; margin-bottom: 30px; }
+.race-info { margin-top: 15px; font-style: italic; color: #ffd700; }
+
+/* --- RULE BOOK STYLE --- */
+.rule-book-box {
+    background-color: #0d1a26;
+    border: 1px solid #3b5a75;
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    max-height: 400px; 
+    overflow-y: auto;
+}
+
+.rule-book-box::-webkit-scrollbar { width: 6px; }
+.rule-book-box::-webkit-scrollbar-thumb { background-color: var(--accent-color); border-radius: 10px; }
+
+.rule-book-title {
+    color: #ffd700; 
+    text-align: center;
+    border-bottom: 2px solid #ffd700;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.rule-section { margin-bottom: 15px; padding-left: 10px; border-left: 3px solid var(--accent-color); }
+.section-heading { color: var(--accent-color); font-size: 1.1em; margin-top: 0; }
+
+.rule-section ul { list-style-type: '👉 '; padding-left: 20px; margin-top: 5px; }
+.rule-section li { margin-bottom: 5px; }
+
+.motto { font-style: italic; color: #4CAF50; font-weight: bold; }
+.divider { border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--accent-color), rgba(0, 0, 0, 0)); margin: 20px 0; }
+
+details { margin-top: 10px; border: 1px solid #3b5a75; padding: 10px; border-radius: 5px; background-color: #2c3e50; cursor: pointer; }
+summary { font-weight: bold; color: #a4b0be; }
+
+/* --- RACE SELECTION GRID (INCLUDING IMAGES) --- */
+.race-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
+.race-btn { 
+    background-color: #3b5a75; color: var(--text-color); border: 1px solid #2c3e50; 
+    padding: 15px 10px; border-radius: 5px; font-size: 0.9em; font-weight: bold; 
+    cursor: pointer; transition: all 0.2s; text-align: center;
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+    
+    /* Image related styles */
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+}
+.race-btn:hover { background-color: #5a80a3; border-color: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); }
+.race-btn.selected { background-color: var(--accent-color); color: var(--bg-color); box-shadow: 0 0 15px var(--accent-color); border-color: var(--accent-color); }
+
+.race-btn-image {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 8px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    transition: border-color 0.2s;
+}
+
+.race-btn.selected .race-btn-image {
+    border-color: var(--bg-color); 
+}
+
+.race-btn-name {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+/* --- QUIZ BATTLE STYLE --- */
+.header { display: flex; justify-content: space-between; margin-bottom: 20px; }
+.info-box { font-size: 1.1em; font-weight: bold; color: var(--accent-color); padding: 8px 15px; border: 1px solid var(--accent-color); background-color: #2c3e50; border-radius: 3px; }
+
+/* --- BATTLE ARENA & HP BAR STYLE --- */
+.battle-arena {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+    padding: 10px;
+    background-color: #101923; 
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+}
+
+.player-hp-container {
+    width: 13%; 
+    min-width: 70px;
+    text-align: center;
+    margin: 5px 0;
+    transition: transform 0.3s ease-in-out;
+}
+
+.player-hp-container.current-turn {
+    transform: scale(1.1);
+    border: 2px solid #ffd700; 
+    border-radius: 5px;
+    box-shadow: 0 0 10px #ffd700;
+}
+
+.player-name-hp {
+    font-size: 0.8em;
+    color: var(--text-color);
+    margin-bottom: 3px;
+    height: 30px; 
+    overflow: hidden; /* Cắt bớt nếu tên quá dài */
+}
+
+.hp-bar-outer {
+    width: 100%;
+    background-color: #555;
+    border: 1px solid #000;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.hp-bar-inner {
+    height: 100%;
+    background-color: var(--correct-color); 
+    transition: width 0.5s ease-out;
+    width: 100%; 
+}
+
+.player-hp-container.eliminated .hp-bar-inner {
+    background-color: var(--incorrect-color); 
+    width: 0% !important; 
+}
+.player-hp-container.eliminated .player-name-hp {
+    color: var(--incorrect-color);
+    text-decoration: line-through;
+}
+/* END HP BAR STYLES */
+
+.question-frame { background-color: #0d1a26; padding: 20px; margin-bottom: 30px; border-left: 5px solid var(--accent-color); border-radius: 3px; }
+#question-text { margin: 0; font-size: 1.3em; color: var(--text-color); }
+
+.team-name { display: block; font-size: 0.8em; color: #ffd700; font-weight: bold; margin-bottom: 5px; border-bottom: 1px dashed #ffd700; padding-bottom: 3px; }
+.char-name { font-size: 1.1em; color: #ffffff; font-weight: bold; }
+
+.button-grid { display: grid; gap: 12px; margin-bottom: 25px; }
+
+.btn { 
+    background-color: var(--btn-color); color: var(--text-color); border: 1px solid var(--accent-color); padding: 15px 20px; border-radius: 3px; font-size: 1em; cursor: pointer; transition: background-color 0.2s; text-align: left;
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+}
+.btn.correct { background-color: var(--correct-color); color: white; }
+.btn.incorrect { background-color: var(--incorrect-color); color: white; }
+
+.next-btn { 
+    background-color: var(--accent-color); color: var(--bg-color); padding: 12px 30px; border: none; border-radius: 3px; font-size: 1.1em; font-weight: bold; cursor: pointer;
+    clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);
+}
+
+.next-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* --- EFFECT DISPLAY (EFFECT) --- */
+.effect-result {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #0d1a26;
+    border: 1px solid #FFC300; 
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.1em;
+}
+.correct-effect { color: #4CAF50; font-weight: bold; }
+.incorrect-effect { color: #F44336; font-weight: bold; }
+/* Thêm quy tắc này vào tệp style.css của bạn */
+
+/* Đảm bảo tất cả hình ảnh không bao giờ vượt quá chiều rộng của khung chứa */
+img {
+    max-width: 100%;
+    height: auto; /* Giữ tỷ lệ khung hình */
+}
+
+/* Nếu bạn có khung cụ thể cho hình ảnh, áp dụng max-width cho khung đó */
+.image-container img {
+    max-width: 100%;
+}
